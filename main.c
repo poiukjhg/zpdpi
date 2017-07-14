@@ -44,7 +44,6 @@ void sig_handler(int sig)
 	if (sig == SIGINT || sig == SIGQUIT){
 		stop_all_childp();
 	}
-	sleep(4);
 	exit(0);
 }
 
