@@ -19,7 +19,7 @@
 #define handle_error_without_exit(msg)  \
 	do { \
 		perror(msg); \
-		printf("exit\n\r"); \
+		printf("without exit\n\r"); \
 	} while (0)
 		
 #ifdef DEBUG	

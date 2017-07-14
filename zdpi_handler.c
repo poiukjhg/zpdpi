@@ -43,8 +43,14 @@ void zdpi_loop(char *check_host_filename, int fd_num, int close_fd)
 	while(True){
 		memset(recv_buf, 0, BUFFER_SIZE);
 		recv_len = recv_msg(msg_fd[fd_num*2+1], recv_buf);
+		if (recv_len <= 0)
+			continue;
 		log_output("recv msg from %d\n\r", msg_fd[fd_num*2+1]);
-		
+		if (strncmp(recv_buf, "stop", 4) == 0){
+			log_output("recv exit\n\r");
+			sleep(3);
+			exit(0);
+		}
 		for (i = 0; i<dpi_module_list_len; i++) {
 			if(dpi_module_list[i]->helper_func);
 				dpi_module_list[i]->helper_func(recv_buf, recv_len, dpi_module_list[i]->helper_userdata);

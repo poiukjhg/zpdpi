@@ -11,6 +11,7 @@
 
 void test_out_http_packet(char *packet, int len, void *userdata)
 {
+	return;
 	const struct ethhdr *ethernet;
 	const struct iphdr *iph;
 	const struct tcphdr *tcph; 

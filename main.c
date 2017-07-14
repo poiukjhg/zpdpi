@@ -40,9 +40,12 @@ static void start_daemon(void)
 }
 void sig_handler(int sig)
 {
-	if (sig == SIGINT){
+	log_output("recv signal\n\r");
+	if (sig == SIGINT || sig == SIGQUIT){
 		stop_all_childp();
 	}
+	sleep(4);
+	exit(0);
 }
 
 void print_packet(uint8_t *packet,
@@ -90,14 +93,15 @@ int main(int argc, char *argv[])
 		}     
 	}
 //TODO
-	//start_daemon();
+	start_daemon();
 
 //TODO
 // signal
 	act.sa_handler = sig_handler; 
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = 0;
-	sigaction(SIGINT, &act, 0);  
+	sigaction(SIGINT, &act, 0);
+	sigaction(SIGQUIT, &act, 0);
 	
 	child_pid_num = get_nprocs();
 	child_pid_num = child_pid_num>1?(child_pid_num-1):1;

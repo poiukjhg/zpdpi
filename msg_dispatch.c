@@ -45,11 +45,11 @@ int recv_msg(int fd, char *read_buf)
 {
 	assert(read_buf);
 	int read_len = 0;
-	log_output("start recv\n\r");
+	//log_output("start recv\n\r");
 	while(True){
 		memset(read_buf, '0', BUFFER_SIZE);
 		read_len = read(fd, read_buf, BUFFER_SIZE);
-		log_output("recv fd %d len = %d\n\r", fd , read_len);
+		//log_output("recv fd %d len = %d\n\r", fd , read_len);
 		if (read_len < 0 ){
 			//perror("read looop\n\r");
 			if(errno == EAGAIN || errno == EWOULDBLOCK){
